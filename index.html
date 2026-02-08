@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>For Jaine 💖</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      height: 100vh;
+      background: linear-gradient(135deg, #ffd6e8, #fff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    .container {
+      background: white;
+      padding: 35px 40px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 20px 40px rgba(255, 105, 180, 0.25);
+      position: relative;
+      max-width: 420px;
+      z-index: 2;
+    }
+
+    h1 {
+      font-family: 'Pacifico', cursive;
+      color: #ff4f9a;
+      font-size: 2.5rem;
+      margin-bottom: 12px;
+    }
+
+    p {
+      color: #555;
+      margin-bottom: 18px;
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    .quote {
+      font-size: 0.9rem;
+      opacity: 0.85;
+    }
+
+    .gif {
+      width: 100%;
+      border-radius: 20px;
+      margin: 18px 0 25px;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+      position: relative;
+    }
+
+    button {
+      border: none;
+      padding: 14px 28px;
+      border-radius: 999px;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    #yesBtn {
+      background: linear-gradient(135deg, #ff5fa2, #ff8acb);
+      color: white;
+      box-shadow: 0 10px 20px rgba(255, 79, 154, 0.4);
+    }
+
+    #yesBtn:hover {
+      transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(255, 79, 154, 0.6);
+    }
+
+    #noBtn {
+      background: #f2f2f2;
+      color: #555;
+      position: relative;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: absolute;
+      font-size: 18px;
+      animation: floatUp 6s linear infinite;
+      opacity: 0.6;
+    }
+
+    @keyframes floatUp {
+      0% { transform: translateY(0); opacity: 0; }
+      20% { opacity: 0.6; }
+      100% { transform: translateY(-100vh); opacity: 0; }
+    }
+
+    .success {
+      font-family: 'Pacifico', cursive;
+      color: #ff4f9a;
+      font-size: 2.2rem;
+      animation: pop 0.6s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.7); }
+      100% { transform: scale(1); }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Soft Anime OST -->
+  <audio id="bgm" loop>
+    <source src="https://files.catbox.moe/3r6r4y.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="container" id="card">
+    <h1>Jaine, will you be my Valentine? 💘</h1>
+
+    <p class="quote">
+      Hey Nana, do you remember the first time we met?<br>
+      I believe in things like fate. So I think it was fate.<br>
+      <span style="font-size: 0.8rem;">– Hachi 💕</span>
+    </p>
+
+    <!-- Nana & Hachi GIF -->
+    <img
+      class="gif"
+      src="https://media.tenor.com/0G7vKpPpUjYAAAAC/nana-anime.gif"
+      alt="Nana and Hachi"
+    />
+
+    <div class="buttons">
+      <button id="yesBtn">YES 💖</button>
+      <button id="noBtn">No 🙄</button>
+    </div>
+  </div>
+
+  <script>
+    const noBtn = document.getElementById('noBtn');
+    const yesBtn = document.getElementById('yesBtn');
+    const card = document.getElementById('card');
+    const bgm = document.getElementById('bgm');
+
+    const noTexts = [
+      "Are you sure? 😳",
+      "Think again 🥺",
+      "That's illegal 😭",
+      "Pleaseeee 💔",
+      "You know you want to 😏"
+    ];
+
+    noBtn.addEventListener('mouseover', () => {
+      const x = Math.random() * 200 - 100;
+      const y = Math.random() * 150 - 75;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+      noBtn.textContent = noTexts[Math.floor(Math.random() * noTexts.length)];
+    });
+
+    yesBtn.addEventListener('click', () => {
+      bgm.play();
+      card.innerHTML = `
+        <div class="success">
+          YAY Jaine 💞<br>
+          My Valentine forever 💖
+        </div>
+      `;
+      confetti();
+    });
+
+    /* Floating hearts */
+    setInterval(() => {
+      const heart = document.createElement('div');
+      heart.className = 'heart';
+      heart.textContent = '💖';
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.fontSize = Math.random() * 20 + 10 + 'px';
+      heart.style.animationDuration = Math.random() * 3 + 4 + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 6000);
+    }, 400);
+
+    /* Confetti */
+    function confetti() {
+      for (let i = 0; i < 90; i++) {
+        const conf = document.createElement('div');
+        conf.style.position = 'absolute';
+        conf.style.width = '8px';
+        conf.style.height = '8px';
+        conf.style.background = `hsl(${Math.random()*360}, 100%, 70%)`;
+        conf.style.left = Math.random() * 100 + 'vw';
+        conf.style.top = '-10px';
+        conf.style.borderRadius = '50%';
+        conf.style.animation = 'fall 3s linear';
+        document.body.appendChild(conf);
+        setTimeout(() => conf.remove(), 3000);
+      }
+    }
+  </script>
+
+</body>
+</html>
